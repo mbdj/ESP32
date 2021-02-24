@@ -1,10 +1,11 @@
-/*
+/************************************************************************
 La classe UnboucedButton permet de créer des boutons qui peuvent être lus
 en évitant les problèmes de rebond
 
 Mehdi Ben Djedidia
 24/02/2021
-*/
+************************************************************************/
+
 #include <arduino.h>
 
 class UnbouncedButton
@@ -12,14 +13,14 @@ class UnbouncedButton
 public:
     enum class ButtonState
     {
-        PRESSED,
-        UNCHANGED
+        PRESSED,    // le bouton a été pressé
+        UNCHANGED   // pas d'appui sur le bouton
     };
 
     enum class Edge
     {
-        PRESSED,
-        RELEASED
+        PRESSED,    // détection à l'appui du bouton
+        RELEASED    // détaction au relachement du bouton
     };
 
     UnbouncedButton(uint8_t pin, uint8_t mode = INPUT, unsigned long debounceDelay = 5, Edge edge = Edge::PRESSED);
