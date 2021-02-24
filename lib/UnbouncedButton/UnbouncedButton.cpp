@@ -20,7 +20,6 @@ UnbouncedButton::UnbouncedButton(uint8_t pin, uint8_t mode, unsigned long deboun
     this->debounceDelay = debounceDelay;
     previousTimeButtonRead = 0L;
     pinMode(pin, mode);
-
 };
 
 UnbouncedButton::ButtonState UnbouncedButton::buttonState(void)
@@ -30,7 +29,7 @@ UnbouncedButton::ButtonState UnbouncedButton::buttonState(void)
     ButtonState buttonState = ButtonState::UNCHANGED;
 
     // On ne lit la nouvelle valeur que si le délai de rebond est passé
-    if (now > previousTimeButtonRead + debounceDelay)
+    if (now - previousTimeButtonRead > debounceDelay)   // voir https://www.youtube.com/watch?v=aPmJdeJrk5M&list=PLuQznwVAhY2V7Uh0aHOgBvaiqRw9VeCis&index=10
     {
 
         if ((mode == INPUT_PULLDOWN && buttonPinRead == HIGH && buttonPreviousState == LOW)

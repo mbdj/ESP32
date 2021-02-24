@@ -25,6 +25,6 @@ private:
     unsigned long previousTimeButtonRead;
     int buttonPreviousState; // LOW ou HIGH
     uint8_t pin;    // pin du bouton
-    uint8_t mode;   // PULLUP ou PULLDOWN
+    uint8_t mode;   // INPUT ou PULLUP ou PULLDOWN
     unsigned long debounceDelay;
 };

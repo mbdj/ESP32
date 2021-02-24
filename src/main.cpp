@@ -11,13 +11,13 @@ void setup()
   Serial.begin(9600L);
   Serial.println("\n-- Test ESP 32 --");
 
-// On configure et on éteind la LED au démarrage
+  // On configure et on éteind la LED au démarrage
   pinMode(PIN_LED, OUTPUT);
   digitalWrite(PIN_LED, LOW);
 }
 
 void loop()
 {
-  if (bouton.buttonPressed())
-    digitalWrite(PIN_LED, !digitalRead(PIN_LED));
+    if (bouton.buttonPressed())
+      digitalWrite(PIN_LED, !digitalRead(PIN_LED));
 };
