@@ -4,7 +4,7 @@
 const uint8_t PIN_LED{5};
 const uint8_t PIN_BOUTON{4};
 
-UnbouncedButton bouton{PIN_BOUTON, INPUT_PULLUP};
+UnbouncedButton bouton{PIN_BOUTON, INPUT_PULLDOWN};
 
 void setup()
 {

@@ -2,11 +2,20 @@
 
 UnbouncedButton::UnbouncedButton(uint8_t pin, uint8_t mode, unsigned long debounceDelay)
 {
-    if (mode == INPUT_PULLDOWN)
+    switch (mode)
+    {
+    case INPUT:
+        /* code */
+        break;
+    case INPUT_PULLDOWN:
         buttonPreviousState = LOW;
-
-    else
+        break;
+    case INPUT_PULLUP:
         buttonPreviousState = HIGH;
+        break;
+    default:
+        break;
+    };
 
     this->pin = pin;
     this->mode = mode;
@@ -14,7 +23,6 @@ UnbouncedButton::UnbouncedButton(uint8_t pin, uint8_t mode, unsigned long deboun
     previousTimeButtonRead = 0L;
     pinMode(pin, mode);
 
-    Serial.begin(9600L);
 };
 
 UnbouncedButton::ButtonState UnbouncedButton::buttonState(void)
@@ -27,7 +35,8 @@ UnbouncedButton::ButtonState UnbouncedButton::buttonState(void)
     if (now > previousTimeButtonRead + debounceDelay)
     {
 
-        if ((mode == INPUT_PULLDOWN && buttonPinRead == HIGH && buttonPreviousState == LOW) or (mode == INPUT_PULLUP && buttonPinRead == LOW && buttonPreviousState == HIGH))
+        if ((mode == INPUT_PULLDOWN && buttonPinRead == HIGH && buttonPreviousState == LOW)
+        or (mode == INPUT_PULLUP && buttonPinRead == LOW && buttonPreviousState == HIGH))
         {
             buttonState = ButtonState::PRESSED;
         };
@@ -40,5 +49,5 @@ UnbouncedButton::ButtonState UnbouncedButton::buttonState(void)
     return buttonState;
 };
 
-bool UnbouncedButton::buttonPressed(void) { return buttonState() == ButtonState::PRESSED; };
+bool UnbouncedButton::buttonPressed(void)   { return buttonState() == ButtonState::PRESSED; };
 bool UnbouncedButton::buttonUnchanged(void) { return buttonState() == ButtonState::UNCHANGED; };
