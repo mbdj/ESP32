@@ -4,16 +4,14 @@ UnbouncedButton::UnbouncedButton(uint8_t pin, uint8_t mode, unsigned long deboun
 {
     switch (mode)
     {
-    case INPUT:
-        /* code */
-        break;
-    case INPUT_PULLDOWN:
+    case INPUT || INPUT_PULLDOWN:
         buttonPreviousState = LOW;
         break;
     case INPUT_PULLUP:
         buttonPreviousState = HIGH;
         break;
     default:
+        buttonPreviousState = LOW;
         break;
     };
 
@@ -36,7 +34,7 @@ UnbouncedButton::ButtonState UnbouncedButton::buttonState(void)
     {
 
         if ((mode == INPUT_PULLDOWN && buttonPinRead == HIGH && buttonPreviousState == LOW)
-        or (mode == INPUT_PULLUP && buttonPinRead == LOW && buttonPreviousState == HIGH))
+         || (mode == INPUT_PULLUP && buttonPinRead == LOW && buttonPreviousState == HIGH))
         {
             buttonState = ButtonState::PRESSED;
         };
