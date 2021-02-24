@@ -10,14 +10,21 @@ Mehdi Ben Djedidia
 class UnbouncedButton
 {
 public:
-    enum class ButtonState {UP, DOWN};
+    enum class ButtonState
+    {
+        PRESSED,
+        UNCHANGED
+    };
 
     UnbouncedButton(uint8_t pin, uint8_t mode = INPUT_PULLDOWN, unsigned long debounceDelay = 5);
-    ButtonState buttonRead();
-    bool buttonIsUp();
-    bool buttonIsDown();
+    ButtonState buttonState(void);
+    bool buttonPressed(void);   // Le bouton a été pressé
+    bool buttonUnchanged(void); // Le bouton n'a pas été pressé
 
 private:
-    ButtonState buttonPreviousState;
-    ButtonState buttonState;
-}
+    unsigned long previousTimeButtonRead;
+    int buttonPreviousState;
+    uint8_t pin;
+    uint8_t mode;
+    unsigned long debounceDelay;
+};
